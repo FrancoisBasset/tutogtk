@@ -8,6 +8,8 @@
 char* sentence;
 Data data;
 
+GtkApplication* global_app;
+
 void on_close() {
 	free(sentence);
 	free(data.firstname);
@@ -15,6 +17,7 @@ void on_close() {
 }
 
 void activate(GtkApplication *app, gpointer args) {
+	global_app = app;
 	data = *(Data*) args;
 
 	sentence = getSentence(data.firstname);
@@ -31,6 +34,14 @@ void activate(GtkApplication *app, gpointer args) {
     gtk_window_present(window);
 
     g_object_unref(builder);
+}
+
+void on_quit_clicked() {
+    GtkBuilder* builder = gtk_builder_new_from_resource("/org/francoisbasset/app/countchar.ui");
+    GtkWindow* window = GTK_WINDOW(gtk_builder_get_object(builder, "window"));
+
+    gtk_window_set_application(window, global_app);
+	gtk_window_present(window);
 }
 
 int main(int argc, char **argv) {

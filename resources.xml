@@ -2,5 +2,6 @@
 <gresources>
   <gresource prefix="/org/francoisbasset/app">
     <file compressed="true">main.ui</file>
+    <file compressed="true">countchar.ui</file>
   </gresource>
 </gresources>
